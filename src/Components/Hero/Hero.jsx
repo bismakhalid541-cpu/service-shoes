@@ -6,7 +6,7 @@ const banners = [
   { type: "video", src: "/Banner1.mp4" },
   { type: "video", src: "/Banner2.mp4" },
   { type: "image", src: "/Banner3.png" },
-  { type: "image", src: "/Banner4.jpg" },
+  { type: "image", src: "/men5.jpg" },
 ];
 
 const HeroSection = () => {
