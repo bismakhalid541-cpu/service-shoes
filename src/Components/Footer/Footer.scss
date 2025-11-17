@@ -1,0 +1,153 @@
+/* Footer */
+.footer {
+  background: #fff;
+  color: #555;
+  font-family: Arial, sans-serif;
+  padding: 40px 40px 20px 40px; // top, right, bottom, left padding
+  width: 100%;
+  position: relative;
+  margin-top: 100px;
+
+  /* Top line inside footer */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5px;
+    background-color: #000;
+  }
+
+  /* 🔥 Newsletter Section */
+  .newsletter-box {
+    text-align: center;
+    padding: 40px 20px 50px 20px;
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 18px;
+    }
+
+    .newsletter-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 320px;
+        padding: 12px 16px;
+        border: 1px solid #ccc;
+        border-right: none;
+        outline: none;
+        font-size: 14px;
+        border-radius: 30px 0 0 30px;
+      }
+
+      .arrow-btn {
+        background: #000;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 0 30px 30px 0;
+        border: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s ease;
+
+        &:hover {
+          background: #333;
+        }
+      }
+    }
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 120px;
+    position: relative;
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+
+      p:hover,
+      a:hover {
+        text-decoration: underline;
+        color: #000;
+      }
+
+      h4 {
+        font-weight: 400;
+        font-size: 12px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      p {
+        margin: 14px 0;
+        cursor: pointer;
+        font-weight: 200;
+        font-size: 10px;
+        color: #555;
+
+        &:hover {
+          color: #000;
+        }
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+
+      .social-icons {
+        margin-top: 16px;
+        display: flex;
+        gap: 14px;
+        font-size: 12px;
+        cursor: pointer;
+
+        svg {
+          transition: color 0.3s;
+        }
+
+        &:hover svg {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    font-size: 9px;
+    font-weight: 200;
+    color: #777;
+    cursor: pointer;
+
+    p {
+      margin: 8px 0;
+    }
+
+    .shipping-info {
+      font-weight: 200;
+      font-size: 8px;
+      color: #888;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .footer .newsletter-input input {
+    width: 220px;
+  }
+}

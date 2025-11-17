@@ -1,0 +1,60 @@
+.fa-question {
+  padding: 60px 200px;
+  margin-top: 150px;
+  font-family: Arial, sans-serif;
+  color: #333;
+
+  h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #111;
+  }
+
+  /* each faq box */
+  .question-1,
+  .question-2 {
+    margin-bottom: 40px;
+  }
+
+  ul {
+    list-style: none; /* Remove bullets globally */
+    padding: 0;
+  }
+
+  /* Question = first li → No bullet, bold */
+  ul li:first-child {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    list-style: none !important;
+  }
+
+  /* Answer = remaining li → With bullets */
+  ul li:not(:first-child) {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 8px 0;
+    list-style: disc;
+    margin-left: 25px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fa-question {
+    padding: 30px 20px;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    ul li:first-child {
+      font-size: 18px;
+    }
+
+    ul li:not(:first-child) {
+      font-size: 14px;
+    }
+  }
+}

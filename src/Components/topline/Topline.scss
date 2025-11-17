@@ -1,0 +1,32 @@
+.container {
+  margin-top: 180px; // space below fixed navbar
+
+  & > .topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f5f5f5; // light background for the bar
+    border-radius: 8px; // optional rounded corners
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // subtle shadow
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 5px; // space between icon and text
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: #333;
+
+      &:hover {
+        color: #ffcc00; // hover highlight
+      }
+
+      svg {
+        font-size: 16px; // icon size
+      }
+    }
+  }
+}

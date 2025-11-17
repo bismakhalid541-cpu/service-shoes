@@ -1,0 +1,21 @@
+.sizeinfo {
+  margin-top: 150px;   // margin apply ho jayega
+  display: flex;
+  justify-content: center;   // center align (optional)
+  
+h1{
+    text-align: left;
+    font-size: 45px;
+}
+.sizepages {
+  display: flex;
+  flex-direction: column;   // images vertical ho jayengi
+  gap: 20px;                // images ke beech spacing
+  margin-top: 100px;
+}
+
+.sizepages img {
+  width: 350px;      // size optional
+  border-radius: 8px;
+}
+}

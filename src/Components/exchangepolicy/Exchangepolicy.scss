@@ -1,0 +1,92 @@
+/* Exchangepolicy.scss */
+
+.exchange-info,
+.exchange-section,
+.claim-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // left align
+  text-align: left;
+  padding: 30px 60px 30px 250px; // top/right/bottom/left padding
+  gap: 10px; // spacing between lines reduced
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin-top: 150px; // reduced from 200px
+}
+
+/* Main heading for Exchange & Claim Policy page */
+.exchange-info h1 {
+  font-size: 50px;  // large main heading
+  font-weight: bold;
+  margin-bottom: 15px; // slightly reduced
+  color: #222;
+}
+
+/* Other headings inside exchange-info section */
+.exchange-info h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 3px 0; // reduced
+  line-height: 1.6;
+}
+
+/* Exchange and Claim section headings */
+.exchange-section h2,
+.claim-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;  // reduced
+  margin-bottom: 10px; // reduced
+  color: #222;
+}
+
+/* Bullet style for paragraphs */
+.exchange-section ul,
+.claim-section ul {
+  list-style-type: disc; /* bullet points */
+  padding-left: 25px;    /* spacing from left */
+  margin: 0;
+}
+
+.exchange-section li,
+.claim-section li {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6; // slightly reduced
+  margin: 5px 0; // reduced
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 1024px) {
+  .exchange-info,
+  .exchange-section,
+  .claim-section {
+    padding-left: 150px; // reduce left padding for medium screens
+  }
+}
+
+@media (max-width: 768px) {
+  .exchange-info,
+  .exchange-section,
+  .claim-section {
+    padding: 20px 20px; // reduced padding
+  }
+
+  .exchange-info h1 {
+    font-size: 38px;
+  }
+
+  .exchange-info h3 {
+    font-size: 16px;
+  }
+
+  .exchange-section h2,
+  .claim-section h2 {
+    font-size: 24px;
+  }
+
+  .exchange-section li,
+  .claim-section li {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,146 @@
+// /* Navbar.scss */
+// .navbar-container {
+//   position: fixed; // make it sticky
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   padding: 0 40px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// .navbar-container .left {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+//   > img {
+//     height: 120px;
+//   }
+
+//   > nav > ul {
+//     display: flex;
+//     list-style-type: none;
+//     gap: 15px;
+//     padding: 0;
+//     margin-top: -10px;
+//     cursor: pointer;
+//   }
+
+//   /* Link styling inside li */
+//   > nav > ul > li {
+//     font-size: 16px;
+//     font-weight: 500;
+//     color: #fff; /* white text */
+//     transition: color 0.3s ease;
+
+//     a {
+//       text-decoration: none;
+//       color: inherit;
+//     }
+
+//     &:hover a {
+//       color: #ffcc00; /* highlight on hover */
+//     }
+//   }
+// }
+
+// .navbar-container .right {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+//   margin-right: 60px;
+//   cursor: pointer;
+
+//   > img {
+//     height: 30px;
+//   }
+// }
+
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.home {
+    background-color: transparent;
+    color: white;
+
+    a {
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
+  }
+
+  &.other {
+    background-color: #fff;
+    color: black;
+
+    a {
+      color: black;
+    }
+
+    p {
+      color: black;
+    }
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > img {
+      height: 120px;
+    }
+
+    > nav > ul {
+      display: flex;
+      list-style-type: none;
+      gap: 15px;
+      padding: 0;
+      margin-top: -10px;
+      cursor: pointer;
+    }
+
+    > nav > ul > li {
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      &:hover a {
+        color: #ffcc00;
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 60px;
+    cursor: pointer;
+
+    > img {
+      height: 30px;
+    }
+  }
+}

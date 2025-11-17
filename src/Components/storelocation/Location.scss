@@ -1,0 +1,63 @@
+.location {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  margin-top: 250px;
+
+  .left {
+    width: 30%;
+    padding: 20px;
+    background: #f7f7f7;
+    border-right: 2px solid #ddd;
+
+    /* 🔥 Scroll Add */
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;         // Firefox
+    scrollbar-color: #aaa #f7f7f7; // Firefox
+
+    /* Chrome, Edge, Safari Scrollbar */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f7f7f7;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #aaa;
+      border-radius: 10px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    p {
+      padding: 10px 0;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      color: #444;
+
+      &:hover {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+
+    .active {
+      font-weight: bold;
+      color: black;
+      text-decoration: underline;
+    }
+  }
+
+  .right {
+    width: 70%;
+
+    iframe {
+      border: none;
+    }
+  }
+}
