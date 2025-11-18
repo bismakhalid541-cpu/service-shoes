@@ -18,7 +18,8 @@ const Men = () => {
   ];
   return (
     <div>
-      <Navbar />
+      <Navbar forceWhite={true} />
+
       
          <Topline/>
          <Productgallery images={menImages}/>  

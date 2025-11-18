@@ -7,7 +7,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === "/Home";
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleSearch = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={`navbar-container ${isHome ? "home" : "other"}`}>
+      <div className={`navbar-container ${isHome ? "home" : "other"}`} >
         {/* Menu icon on top-left */}
         <div
           className={`menu-icon ${menuOpen ? "open" : ""}`}

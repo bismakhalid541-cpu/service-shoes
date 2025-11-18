@@ -6,7 +6,7 @@ import Aboutus from'../Components/about/About';
 const AboutUs = () => {
   return (
     <div className="about-container">
-        <Navbar/>
+        <Navbar backgroundColor={'white'}/>
         <Aboutus/>
         <Footer/>
     </div>
