@@ -1,116 +1,216 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const isHome = location.pathname === "/Home";
+
+  // Cart items (empty for now)
+  const cartItems = [];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
     setSearchQuery("");
   };
+  const toggleCart = () => setCartOpen(prev => !prev);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       console.log("Searching for:", searchQuery);
-      // Yahan aap search functionality add kar sakte hain
       setSearchOpen(false);
     }
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <>
-      <div className={`navbar-container ${isHome ? "home" : "other"}`} >
-        {/* Menu icon on top-left */}
+      {/* NAVBAR */}
+      <div className={`navbar-container ${isHome ? "home" : "other"}`}>
+        {/* Hamburger Menu Icon */}
         <div
           className={`menu-icon ${menuOpen ? "open" : ""}`}
           onClick={toggleMenu}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") toggleMenu();
-          }}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleMenu()}
           aria-label="Toggle menu"
         >
-          <span />
-          <span />
-          <span />
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
 
+        {/* Left Side - Logo & Nav */}
         <div className="left">
-          <img src="/logo.png" alt="logo" className="logo" />
-          <nav>
+          <Link to="/Home">
+            <img src="/logo.png" alt="logo" className="logo" />
+          </Link>
+          <nav className="desktop-nav">
             <ul>
-              <li>
-                <a href="/men">Men</a>
-              </li>
-              <li>
-                <a href="/women">Women</a>
-              </li>
-              <li>
-                <a href="/kids">Kids</a>
-              </li>
-              <li>
-                <a href="/sales">Sales</a>
-              </li>
+              <li><Link to="/men">MEN</Link></li>
+              <li><Link to="/women">WOMEN</Link></li>
+              <li><Link to="/kids">KIDS</Link></li>
+              <li><Link to="/sales">SALES</Link></li>
             </ul>
           </nav>
         </div>
 
+        {/* Right Side - Search & Cart */}
         <div className="right">
-          <p onClick={toggleSearch} className="search-trigger">
-            SEARCH
-          </p>
-          <img src="/bag-carts-removebg-preview.png" alt="cart" />
+          <p onClick={toggleSearch} className="search-trigger">SEARCH</p>
+          <div className="cart-wrapper" onClick={toggleCart}>
+            <img src="/bag-carts-removebg-preview.png" alt="cart" />
+            <span className="cart-badge">{cartItems.length}</span>
+          </div>
         </div>
       </div>
 
-      {/* Full Screen Search Overlay */}
+      {/* MOBILE MENU DROPDOWN */}
+      {menuOpen && (
+        <div className="mobile-menu-overlay" onClick={closeMenu}>
+          <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <img src="/logo.png" alt="logo" className="mobile-logo" />
+              <button onClick={closeMenu} className="close-menu-btn">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+
+            <ul className="mobile-menu-links">
+              {/* Top Level Links */}
+              <li><Link to="/men" onClick={closeMenu}>MEN</Link></li>
+              <li><Link to="/women" onClick={closeMenu}>WOMEN</Link></li>
+              <li><Link to="/kids" onClick={closeMenu}>KIDS</Link></li>
+              <li><Link to="/sales" onClick={closeMenu}>SALE</Link></li>
+
+              {/* Highlighted Sale Section */}
+              <li className="highlight">
+                <Link to="/sales/flat-40-off" onClick={closeMenu}>SALE</Link>
+              </li>
+              <li className="highlight">
+                <Link to="/sales/flat-40-off" onClick={closeMenu}>FLAT 40% OFF</Link>
+              </li>
+
+              {/* Apparel */}
+              <li>
+                <Link to="/apparel" onClick={closeMenu}>APPAREL</Link>
+              </li>
+
+              {/* New Arrivals */}
+              <li>
+                <Link to="/new-arrivals" onClick={closeMenu}>NEW ARRIVALS</Link>
+              </li>
+
+              {/* Shoes with Subcategories */}
+              <li>
+                <Link to="/shoes" onClick={closeMenu}>SHOES</Link>
+                <ul className="submenu">
+                  <li><Link to="/shoes/athleisure" onClick={closeMenu}>ATHLEISURE</Link></li>
+                  <li><Link to="/shoes/formal" onClick={closeMenu}>FORMAL</Link></li>
+                  <li><Link to="/shoes/moccs" onClick={closeMenu}>MOCCS</Link></li>
+                  <li><Link to="/shoes/casual" onClick={closeMenu}>CASUAL</Link></li>
+                  <li><Link to="/shoes/boots" onClick={closeMenu}>BOOTS</Link></li>
+                  <li><Link to="/shoes/chappal" onClick={closeMenu}>CHAPPAL</Link></li>
+                  <li><Link to="/shoes/sandal" onClick={closeMenu}>SANDAL</Link></li>
+                  <li><Link to="/shoes/peshawari" onClick={closeMenu}>PESHAWARI</Link></li>
+                </ul>
+              </li>
+
+              {/* Additional Links */}
+              <li><Link to="/account" onClick={closeMenu}>MY ACCOUNT</Link></li>
+              <li><Link to="/wishlist" onClick={closeMenu}>WISHLIST</Link></li>
+            </ul>
+
+            <div className="mobile-menu-footer">
+              {cartItems.length > 0 ? (
+                <Link to="/cart" onClick={closeMenu} className="cart-link">
+                  <span>My Cart ({cartItems.length})</span>
+                  <strong>View Cart →</strong>
+                </Link>
+              ) : (
+                <p className="no-account">Have an account? <Link to="/login" onClick={closeMenu}>Log in</Link></p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SEARCH OVERLAY */}
       {searchOpen && (
         <div className="search-overlay-fullscreen">
           <div className="search-overlay-content">
             <form onSubmit={handleSearch} className="search-form">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search for products, brands..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
               />
               <button type="submit" className="search-btn">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="8" />
                   <path d="m21 21-4.35-4.35" />
                 </svg>
               </button>
             </form>
-            
             <button className="close-btn" onClick={toggleSearch}>
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* CART SIDEBAR */}
+      {cartOpen && (
+        <div className="cart-dropdown-overlay" onClick={() => setCartOpen(false)}>
+          <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
+            <div className="cart-header">
+              <h3>My Cart {cartItems.length > 0 && <span>({cartItems.length})</span>}</h3>
+              <button onClick={() => setCartOpen(false)}>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+
+            {cartItems.length === 0 ? (
+              <div className="empty-cart">
+                <div className="empty-cart-icon">
+                  <img src="/bag-carts-removebg-preview.png" alt="empty cart" />
+                </div>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added anything yet.</p>
+                <Link to="/sales">
+                  <button className="continue-shopping-btn" onClick={() => setCartOpen(false)}>
+                    Continue Shopping
+                  </button>
+                </Link>
+                <div className="login-prompt">
+                  <p>Have an account?</p>
+                  <Link to="/login" className="login-link">
+                    Log in to check out faster
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <div>Filled cart content here...</div>
+            )}
           </div>
         </div>
       )}
