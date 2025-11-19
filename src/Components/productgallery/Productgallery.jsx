@@ -2,25 +2,25 @@ import React, { useState, useRef } from "react";
 import "./Productgallery.scss";
 import { useNavigate } from "react-router-dom";
 
-const ProductGallery = ({ images }) => {
+const ProductGallery = ({ products }) => {
   return (
     <div className="gallery-slider-container">
-      {images.map((imgSrc, idx) => (
-        <Card key={idx} images={images} productId={idx + 1} />
+      {products.map((product) => (
+        <Card key={product.id} product={product} />
       ))}
     </div>
   );
 };
 
-const Card = ({ images, productId }) => {
+const Card = ({ product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef(null);
-  const navigate = useNavigate(); // React Router hook
+  const navigate = useNavigate();
 
   const startSlider = () => {
-    if (!intervalRef.current) {
+    if (!intervalRef.current && product.images.length > 1) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % product.images.length);
       }, 3000);
     }
   };
@@ -32,10 +32,20 @@ const Card = ({ images, productId }) => {
     }
   };
 
-  const goToSlide = (index) => setCurrentIndex(index);
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
 
   const handleClick = () => {
-    navigate(`/detail-page/${productId}`);
+    // Navigate to detail page with product data
+    navigate(`/detail-page/${product.id}`, { 
+      state: { product } 
+    });
+  };
+
+  const handleDotClick = (e, index) => {
+    e.stopPropagation(); // Prevent card click when clicking dots
+    goToSlide(index);
   };
 
   return (
@@ -43,30 +53,32 @@ const Card = ({ images, productId }) => {
       className="gallery-card"
       onMouseEnter={startSlider}
       onMouseLeave={stopSlider}
-      onClick={handleClick}   // ✅ click navigates to detail page
+      onClick={handleClick}
       style={{ cursor: "pointer" }}
     >
       <div className="image-wrapper">
-        <img src={images[currentIndex]} alt="product" />
+        <img src={product.images[currentIndex]} alt={product.title} />
 
         <div className="btn-group">
-          <button className="new">New</button>
-          <button className="discount">-25%</button>
+          {product.isNew && <button className="new">New</button>}
+          {product.discount && <button className="discount">{product.discount}</button>}
         </div>
 
-        <div className="dots">
-          {images.slice(0, 5).map((_, idx) => (
-            <span
-              key={idx}
-              className={`dot ${idx === currentIndex ? "active" : ""}`}
-              onClick={() => goToSlide(idx)}
-            ></span>
-          ))}
-        </div>
+        {product.images.length > 1 && (
+          <div className="dots">
+            {product.images.slice(0, 5).map((_, idx) => (
+              <span
+                key={idx}
+                className={`dot ${idx === currentIndex ? "active" : ""}`}
+                onClick={(e) => handleDotClick(e, idx)}
+              ></span>
+            ))}
+          </div>
+        )}
       </div>
 
-      <p className="description">ONLINE EXCLUSIVE DISCOUNT</p>
-      <p className="price">Rs. 3,499</p>
+      <p className="description">{product.title}</p>
+      <p className="price">{product.price}</p>
     </div>
   );
 };

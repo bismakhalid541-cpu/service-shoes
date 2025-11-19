@@ -1,9 +1,8 @@
-
 .footer {
   background: #fff;
   color: #555;
   font-family: Arial, sans-serif;
-  padding: 40px 40px 20px;
+  padding: 40px 40px 0;
   width: 100%;
   position: relative;
   margin-top: 100px;
@@ -90,7 +89,8 @@
         color: #333;
       }
 
-      p, a {
+      p,
+      a {
         margin: 14px 0;
         cursor: pointer;
         font-weight: 200;
@@ -124,66 +124,86 @@
     }
   }
 
+  // Footer Bottom
   .footer-bottom {
     margin-top: 50px;
     border-top: 1px solid #eee;
     padding-top: 20px;
+    position: relative;
+    padding-bottom: 50px; // marquee کے لیے جگہ
 
     .footer-info1 {
-      text-align: center;
+      text-align: right;
       font-size: 9px;
       font-weight: bold;
       color: #000;
       margin-bottom: 20px;
     }
 
-    /* MARQUEE SHIPPING INFO – SMOOTH RUNNING TEXT */
+    // Full Width Edge-to-Edge Marquee
     .shipping-marquee {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: #000;
       color: #fff;
-      padding: 12px 0;
+      padding: 14px 0;
       overflow: hidden;
       white-space: nowrap;
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.5px;
+      width: 100vw;
+      margin-left: 50%;
+      transform: translateX(-50%);
 
       .marquee-content {
         display: inline-block;
-        animation: marquee 18s linear infinite;
+        animation: marquee 20s linear infinite;
+        padding-left: 100%;
 
         span {
           display: inline-block;
-          padding-right: 60px; /* Gap between repeats */
+          padding-right: 100px;
         }
       }
     }
   }
 }
 
-/* Marquee Animation */
+// Perfect Seamless Marquee Animation
 @keyframes marquee {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
-/* Responsive */
+// Responsive
 @media (max-width: 768px) {
   .footer {
-    padding: 30px 20px;
+    padding: 30px 20px 0;
+  }
 
-    .footer-top {
-      gap: 50px;
-      justify-content: center;
-    }
+  .footer-top {
+    gap: 50px;
+    justify-content: center;
+  }
 
-    .shipping-marquee {
-      font-size: 12px;
+  .shipping-marquee {
+    font-size: 12px;
+    padding: 12px 0;
+
+    .marquee-content span {
+      padding-right: 60px;
     }
+  }
+
+  .marquee-content {
+    animation-duration: 16s;
   }
 }
 
@@ -191,14 +211,10 @@
   .footer-top {
     flex-direction: column;
     gap: 40px;
-
-    .footer-column {
-      min-width: 100%;
-      text-align: center;
-    }
+    text-align: center;
   }
 
-  .shipping-marquee .marquee-content {
-    animation-duration: 14s; /* Thoda faster on mobile */
+  .marquee-content {
+    animation-duration: 14s;
   }
 }

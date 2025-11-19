@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import './Signup.scss'
+import './Signup.scss';
 import { signup } from "../../services/AuthServices";
-import { useNavigate } from "react-router-dom"; // ← import useNavigate
 
 const Signup = ({ switchToLogin }) => {
   const [email, setEmail] = useState("");
@@ -9,24 +8,45 @@ const Signup = ({ switchToLogin }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // ← initialize
+  const [loading, setLoading] = useState(false); // Optional: loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
+    // Password match check
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
+    if (!name || !email || !password) {
+      setError("Please fill in all fields");
+      setLoading(false);
       return;
     }
 
     try {
-      const user = await signup(name, email, password);
-      console.log("Signed up user:", user);
-      alert("Signup successful!");
-      navigate("/home"); // ← navigate after signup
+      await signup(name, email, password);
+      
+      // Success → Show message & switch to Login
+      alert("Account created successfully! Please login to continue.");
+
+      // Reset form
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
+      // Yeh main cheez — Login form pe le jao
+      switchToLogin();
+
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,42 +58,75 @@ const Signup = ({ switchToLogin }) => {
           <p>Sign up to get started</p>
         </div>
 
-        <div className="signup-form">
+        <form className="signup-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Full Name</label>
-            <input type="text" placeholder="Enter your name"
-              value={name} onChange={(e) => setName(e.target.value)} required />
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email"
-              value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password"
-              value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input
+              type="password"
+              placeholder="Create a strong password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm your password"
-              value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+            <input
+              type="password"
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
           </div>
 
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <p className="error-message">{error}</p>}
 
-          <button onClick={handleSubmit} className="submit-btn">Sign Up</button>
+          <button
+            type="submit"
+            className={`submit-btn ${loading ? "loading" : ""}`}
+            disabled={loading}
+          >
+            {loading ? "Creating Account..." : "Sign Up"}
+          </button>
+        </form>
+
+        <div className="divider">
+          <span>OR</span>
         </div>
-
-        <div className="divider"><span>OR</span></div>
 
         <div className="login-link">
           <p>
             Already have an account?{" "}
-            <span onClick={switchToLogin} style={{ cursor: "pointer", color: "#667eea", fontWeight: "600" }}>Login</span>
+            <span
+              onClick={switchToLogin}
+              style={{ cursor: "pointer", color: "#667eea", fontWeight: "600" }}
+            >
+              Login
+            </span>
           </p>
         </div>
       </div>

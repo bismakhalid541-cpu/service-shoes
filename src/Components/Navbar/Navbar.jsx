@@ -8,7 +8,9 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const isHome = location.pathname === "/Home";
+
+  // YE LINE FIX KI HAI — AB SAB CASES COVER HAIN
+  const isHome = ["/", "/home", "/Home"].includes(location.pathname);
 
   // Cart items (empty for now)
   const cartItems = [];
@@ -32,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      {/* NAVBAR */}
+      {/* NAVBAR - Ab hamesha sahi background dikhega */}
       <div className={`navbar-container ${isHome ? "home" : "other"}`}>
         {/* Hamburger Menu Icon */}
         <div
@@ -50,7 +52,7 @@ const Navbar = () => {
 
         {/* Left Side - Logo & Nav */}
         <div className="left">
-          <Link to="/Home">
+          <Link to="/home">
             <img src="/logo.png" alt="logo" className="logo" />
           </Link>
           <nav className="desktop-nav">
@@ -73,12 +75,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU DROPDOWN */}
+      {/* Baaki sab same — mobile menu, search, cart */}
       {menuOpen && (
         <div className="mobile-menu-overlay" onClick={closeMenu}>
           <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-menu-header">
               <img src="/logo.png" alt="logo" className="mobile-logo" />
+              <ul>
+                <li><Link to="/men" onClick={closeMenu}>MEN</Link></li>
+                <li><Link to="/women" onClick={closeMenu}>WOMEN</Link></li>
+                <li><Link to="/kids" onClick={closeMenu}>KIDS</Link></li>
+                <li><Link to="/sales" onClick={closeMenu}>SALE</Link></li>
+              </ul>
               <button onClick={closeMenu} className="close-menu-btn">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -88,65 +96,49 @@ const Navbar = () => {
             </div>
 
             <ul className="mobile-menu-links">
-              {/* Top Level Links */}
-              <li><Link to="/men" onClick={closeMenu}>MEN</Link></li>
-              <li><Link to="/women" onClick={closeMenu}>WOMEN</Link></li>
-              <li><Link to="/kids" onClick={closeMenu}>KIDS</Link></li>
-              <li><Link to="/sales" onClick={closeMenu}>SALE</Link></li>
+              <li className="highlight"><Link to="/sales/flat-40-off" onClick={closeMenu}>SALE</Link></li>
+              <li className="highlight"><Link to="/sales/flat-40-off" onClick={closeMenu}>FLAT 40% OFF</Link></li>
 
-              {/* Highlighted Sale Section */}
-              <li className="highlight">
-                <Link to="/sales/flat-40-off" onClick={closeMenu}>SALE</Link>
-              </li>
-              <li className="highlight">
-                <Link to="/sales/flat-40-off" onClick={closeMenu}>FLAT 40% OFF</Link>
-              </li>
+              <li><Link to="/apparel" onClick={closeMenu}>APPAREL</Link></li>
+              <li><Link to="/new-arrivals" onClick={closeMenu}>NEW ARRIVALS</Link></li>
 
-              {/* Apparel */}
-              <li>
-                <Link to="/apparel" onClick={closeMenu}>APPAREL</Link>
-              </li>
-
-              {/* New Arrivals */}
-              <li>
-                <Link to="/new-arrivals" onClick={closeMenu}>NEW ARRIVALS</Link>
-              </li>
-
-              {/* Shoes with Subcategories */}
               <li>
                 <Link to="/shoes" onClick={closeMenu}>SHOES</Link>
                 <ul className="submenu">
-                  <li><Link to="/shoes/athleisure" onClick={closeMenu}>ATHLEISURE</Link></li>
-                  <li><Link to="/shoes/formal" onClick={closeMenu}>FORMAL</Link></li>
-                  <li><Link to="/shoes/moccs" onClick={closeMenu}>MOCCS</Link></li>
-                  <li><Link to="/shoes/casual" onClick={closeMenu}>CASUAL</Link></li>
-                  <li><Link to="/shoes/boots" onClick={closeMenu}>BOOTS</Link></li>
-                  <li><Link to="/shoes/chappal" onClick={closeMenu}>CHAPPAL</Link></li>
-                  <li><Link to="/shoes/sandal" onClick={closeMenu}>SANDAL</Link></li>
-                  <li><Link to="/shoes/peshawari" onClick={closeMenu}>PESHAWARI</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>ATHLEISURE</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>FORMAL</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>MOCCS</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>CASUAL</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>BOOTS</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>CHAPPAL</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>SANDAL</Link></li>
+                  <li><Link to="/women" onClick={closeMenu}>PESHAWARI</Link></li>
                 </ul>
               </li>
 
-              {/* Additional Links */}
-              <li><Link to="/account" onClick={closeMenu}>MY ACCOUNT</Link></li>
-              <li><Link to="/wishlist" onClick={closeMenu}>WISHLIST</Link></li>
+              <li><Link to="/accessories" onClick={closeMenu}>ACCESSORIES</Link></li>
+              <li><Link to="/premium-collection" onClick={closeMenu}>PREMIUM COLLECTION</Link></li>
+              <li><Link to="/leather-shoes" onClick={closeMenu}>LEATHER SHOES</Link></li>
+              <li><Link to="/order" onClick={closeMenu}>TRACK YOUR ORDER</Link></li>
             </ul>
 
             <div className="mobile-menu-footer">
               {cartItems.length > 0 ? (
                 <Link to="/cart" onClick={closeMenu} className="cart-link">
                   <span>My Cart ({cartItems.length})</span>
-                  <strong>View Cart →</strong>
+                  <strong>View Cart</strong>
                 </Link>
               ) : (
-                <p className="no-account">Have an account? <Link to="/login" onClick={closeMenu}>Log in</Link></p>
+                <p className="no-account">
+                  Have an account?  <span>Login</span>
+                </p>
               )}
             </div>
           </div>
         </div>
       )}
 
-      {/* SEARCH OVERLAY */}
+      {/* Search & Cart Overlays - same as before */}
       {searchOpen && (
         <div className="search-overlay-fullscreen">
           <div className="search-overlay-content">
@@ -175,7 +167,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* CART SIDEBAR */}
       {cartOpen && (
         <div className="cart-dropdown-overlay" onClick={() => setCartOpen(false)}>
           <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
@@ -188,7 +179,6 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-
             {cartItems.length === 0 ? (
               <div className="empty-cart">
                 <div className="empty-cart-icon">
@@ -201,12 +191,6 @@ const Navbar = () => {
                     Continue Shopping
                   </button>
                 </Link>
-                <div className="login-prompt">
-                  <p>Have an account?</p>
-                  <Link to="/login" className="login-link">
-                    Log in to check out faster
-                  </Link>
-                </div>
               </div>
             ) : (
               <div>Filled cart content here...</div>
