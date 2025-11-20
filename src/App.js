@@ -17,6 +17,7 @@ import FAQS from "./pages/FAQS.jsx";
 import Storelocation from "./pages/Storelocation.jsx";
 import Details from "./pages/Details.jsx";
 import Loginsignup from "./pages/Loginsignup.jsx";
+import Infosection from "./pages/Infosection.jsx";
 function App() {
   return (
     <div className="App">
@@ -37,6 +38,7 @@ function App() {
         <Route path="/FAQS" element={<FAQS />} />
         <Route path="/store-location" element={<Storelocation />} />
         <Route path="/detail-page/:id" element={<Details />} />
+        <Route path="/Infosection" element={<Infosection />} />
        
       </Routes>
     </div>

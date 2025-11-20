@@ -1,56 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { X, Trash2 } from "lucide-react";
 import "./Navbar.scss";
 
-const Navbar = ({ cartCount = 0 }) => {
+const Navbar = ({ cartTrigger = 0 }) => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [city, setCity] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [agreed, setAgreed] = useState(false);
 
-  // YE LINE FIX KI HAI — AB SAB CASES COVER HAIN
+  // Cart real-time localStorage se load
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem("MY_CART_2025");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Jab bhi cartTrigger badhe → cart re-load karo (latest data milega)
+  useEffect(() => {
+    const saved = localStorage.getItem("MY_CART_2025");
+    if (saved) {
+      try {
+        setCartItems(JSON.parse(saved));
+      } catch (e) {
+        setCartItems([]);
+      }
+    }
+    // Trigger aane pe drawer kholo
+    if (cartTrigger > 0) {
+      setCartOpen(true);
+    }
+  }, [cartTrigger]);
+
   const isHome = ["/", "/home", "/Home"].includes(location.pathname);
 
-  // Cart items (empty for now)
-  const cartItems = [];
+  // Real-time count aur total
+  const totalCount = cartItems.reduce((acc, item) => acc + (item.qty || 1), 0);
+  const estimatedTotal = cartItems.reduce((acc, item) => acc + item.price * (item.qty || 1), 0);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    setSearchQuery("");
-  };
-  const toggleCart = () => setCartOpen(prev => !prev);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Searching for:", searchQuery);
-      setSearchOpen(false);
-    }
+  const incrementQty = (id, size, color) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id && item.size === size && item.color === color
+          ? { ...item, qty: item.qty + 1 }
+          : item
+      )
+    );
   };
 
-  const closeMenu = () => setMenuOpen(false);
+  const decrementQty = (id, size, color) => {
+    setCartItems(prev =>
+      prev
+        .map(item =>
+          item.id === id && item.size === size && item.color === color
+            ? { ...item, qty: Math.max(1, item.qty - 1) }
+            : item
+        )
+        .filter(item => item.qty > 0)
+    );
+  };
+
+  const removeItem = (id, size, color) => {
+    setCartItems(prev =>
+      prev.filter(item => !(item.id === id && item.size === size && item.color === color))
+    );
+  };
 
   return (
     <>
-      {/* NAVBAR - Ab hamesha sahi background dikhega */}
       <div className={`navbar-container ${isHome ? "home" : "other"}`}>
-        {/* Hamburger Menu Icon */}
-        <div
-          className={`menu-icon ${menuOpen ? "open" : ""}`}
-          onClick={toggleMenu}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && toggleMenu()}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <div className={`menu-icon ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span><span></span><span></span>
         </div>
 
-        {/* Left Side - Logo & Nav */}
         <div className="left">
           <Link to="/home">
             <img src="/logo.png" alt="logo" className="logo" />
@@ -65,138 +92,117 @@ const Navbar = ({ cartCount = 0 }) => {
           </nav>
         </div>
 
-        {/* Right Side - Search & Cart */}
         <div className="right">
-          <p onClick={toggleSearch} className="search-trigger">SEARCH</p>
-          <div className="cart-wrapper" onClick={toggleCart}>
+          <p className="search-trigger">SEARCH</p>
+          <div className="cart-wrapper" onClick={() => setCartOpen(true)}>
             <img src="/bag-carts-removebg-preview.png" alt="cart" />
-            <span className="cart-badge">{cartItems.length}</span>
+            <span className="cart-badge">{totalCount}</span>
           </div>
         </div>
       </div>
 
-      {/* Baaki sab same — mobile menu, search, cart */}
-      {menuOpen && (
-        <div className="mobile-menu-overlay" onClick={closeMenu}>
-          <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-            <div className="mobile-menu-header">
-              <img src="/logo.png" alt="logo" className="mobile-logo" />
-              <ul>
-                <li><Link to="/men" onClick={closeMenu}>MEN</Link></li>
-                <li><Link to="/women" onClick={closeMenu}>WOMEN</Link></li>
-                <li><Link to="/kids" onClick={closeMenu}>KIDS</Link></li>
-                <li><Link to="/sales" onClick={closeMenu}>SALE</Link></li>
-              </ul>
-              <button onClick={closeMenu} className="close-menu-btn">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+      {/* Cart Drawer */}
+      {cartOpen && (
+        <>
+          <div className="cart-overlay" onClick={() => setCartOpen(false)} />
+          <div className="cart-sidebar">
+            <div className="cart-header-sticky">
+              <h2>Your cart</h2>
+              <button onClick={() => setCartOpen(false)} className="close-btn">
+                <X size={28} />
               </button>
             </div>
 
-            <ul className="mobile-menu-links">
-              <li className="highlight"><Link to="/sales/flat-40-off" onClick={closeMenu}>SALE</Link></li>
-              <li className="highlight"><Link to="/sales/flat-40-off" onClick={closeMenu}>FLAT 40% OFF</Link></li>
-
-              <li><Link to="/apparel" onClick={closeMenu}>APPAREL</Link></li>
-              <li><Link to="/new-arrivals" onClick={closeMenu}>NEW ARRIVALS</Link></li>
-
-              <li>
-                <Link to="/shoes" onClick={closeMenu}>SHOES</Link>
-                <ul className="submenu">
-                  <li><Link to="/women" onClick={closeMenu}>ATHLEISURE</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>FORMAL</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>MOCCS</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>CASUAL</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>BOOTS</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>CHAPPAL</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>SANDAL</Link></li>
-                  <li><Link to="/women" onClick={closeMenu}>PESHAWARI</Link></li>
-                </ul>
-              </li>
-
-              <li><Link to="/accessories" onClick={closeMenu}>ACCESSORIES</Link></li>
-              <li><Link to="/premium-collection" onClick={closeMenu}>PREMIUM COLLECTION</Link></li>
-              <li><Link to="/leather-shoes" onClick={closeMenu}>LEATHER SHOES</Link></li>
-              <li><Link to="/order" onClick={closeMenu}>TRACK YOUR ORDER</Link></li>
-            </ul>
-
-            <div className="mobile-menu-footer">
-              {cartItems.length > 0 ? (
-                <Link to="/cart" onClick={closeMenu} className="cart-link">
-                  <span>My Cart ({cartItems.length})</span>
-                  <strong>View Cart</strong>
-                </Link>
+            <div className="cart-content">
+              {cartItems.length === 0 ? (
+                <div className="empty-cart">
+                  <img src="/bag-carts-removebg-preview.png" alt="empty" />
+                  <h3>Your cart is empty</h3>
+                  <Link to="/sales" onClick={() => setCartOpen(false)}>
+                    <button className="continue-btn">Continue Shopping</button>
+                  </Link>
+                </div>
               ) : (
-                <p className="no-account">
-                  Have an account?  <span>Login</span>
-                </p>
+                <>
+                  <div className="products-header">
+                    <span>PRODUCT</span>
+                    <span>TOTAL</span>
+                  </div>
+
+                  <div className="cart-items">
+                    {cartItems.map((item, index) => (
+                      <div key={`${item.id}-${item.size}-${index}`} className="cart-item-row">
+                        <div className="item-image">
+                          <img src={item.images?.[0] || "/placeholder.jpg"} alt={item.title} />
+                        </div>
+
+                        <div className="item-details">
+                          <h4>{item.title}</h4>
+                          {item.originalPrice && (
+                            <p className="old-price">Rs.{item.originalPrice.toLocaleString()}</p>
+                          )}
+                          <p className="current-price">Rs.{item.price.toLocaleString()}</p>
+
+                          <div className="item-meta">
+                            <span>SIZE: {item.size}</span>
+                            <span>COLOR: {item.color}</span>
+                          </div>
+
+                          <div className="quantity-trash">
+                            <div className="quantity-control">
+                              <button onClick={() => decrementQty(item.id, item.size, item.color)}>-</button>
+                              <span>{item.qty}</span>
+                              <button onClick={() => incrementQty(item.id, item.size, item.color)}>+</button>
+                            </div>
+                            <button onClick={() => removeItem(item.id, item.size, item.color)} className="trash-btn">
+                              <Trash2 size={20} />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="item-total">
+                          Rs.{(item.price * item.qty).toLocaleString()}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="estimated-total">
+                    <div className="total-row">
+                      <strong>Estimated total</strong>
+                      <strong>Rs.{estimatedTotal.toLocaleString()}</strong>
+                    </div>
+                    <p>Taxes, Discounts and shipping calculated at checkout</p>
+                  </div>
+
+                  <div className="checkout-form">
+                    <select value={city} onChange={(e) => setCity(e.target.value)}>
+                      <option value="">Select City</option>
+                      <option>Karachi</option>
+                      <option>Lahore</option>
+                      <option>Islamabad</option>
+                    </select>
+                    <input
+                      type="text"
+                      placeholder="0300XXXXXXX"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                    />
+                  </div>
+
+                  <label className="terms-checkbox">
+                    <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+                    <span>I agree with the terms and conditions.</span>
+                  </label>
+
+                  <button className="checkout-btn" disabled={!agreed || !city || !mobile}>
+                    Check out
+                  </button>
+                </>
               )}
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Search & Cart Overlays - same as before */}
-      {searchOpen && (
-        <div className="search-overlay-fullscreen">
-          <div className="search-overlay-content">
-            <form onSubmit={handleSearch} className="search-form">
-              <input
-                type="text"
-                placeholder="Search for products, brands..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-              />
-              <button type="submit" className="search-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.35-4.35" />
-                </svg>
-              </button>
-            </form>
-            <button className="close-btn" onClick={toggleSearch}>
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {cartOpen && (
-        <div className="cart-dropdown-overlay" onClick={() => setCartOpen(false)}>
-          <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
-            <div className="cart-header">
-              <h3>My Cart {cartItems.length > 0 && <span>({cartItems.length})</span>}</h3>
-              <button onClick={() => setCartOpen(false)}>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-            </div>
-            {cartItems.length === 0 ? (
-              <div className="empty-cart">
-                <div className="empty-cart-icon">
-                  <img src="/bag-carts-removebg-preview.png" alt="empty cart" />
-                </div>
-                <h2>Your cart is empty</h2>
-                <p>Looks like you haven't added anything yet.</p>
-                <Link to="/sales">
-                  <button className="continue-shopping-btn" onClick={() => setCartOpen(false)}>
-                    Continue Shopping
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <div>Filled cart content here...</div>
-            )}
-          </div>
-        </div>
+        </>
       )}
     </>
   );
