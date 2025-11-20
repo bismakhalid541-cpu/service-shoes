@@ -58,23 +58,36 @@
     font-weight: 600;
     margin: 30px 0 16px;
   }
-
-  .country-select,
-  input,
-  select {
-    width: 100%;
-    padding: 14px;
-    border: 1.5px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
+.country-select,
+input,
+select {
+  width: 100%;
+  padding: 14px 16px;           /* Left-right thoda zyada comfortable */
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  box-sizing: border-box;       /* Important — taaki padding width affect na kare */
+  margin-bottom: 16px;
+  transition: border 0.2s ease;
+}
+  .name-row {
+    display: grid;
+    /* Grid sabse best hai iske liye */
+    grid-template-columns: 1fr 1fr;
+    /* Dono fields exactly barabar width */
+    gap: 40px;
+    /* ← Yahan gap control kar lo (20px perfect lagta hai) */
     margin-bottom: 16px;
   }
-
-  .name-row,
+@media (max-width: 480px) {
+    grid-template-columns: 1fr;     /* Mobile pe full width */
+    gap: 16px;
+  }
   .city-postal-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+
   }
 
   .save-info {
@@ -298,5 +311,143 @@
   .checkout-form-section,
   .order-summary {
     padding: 20px;
+  }
+}
+
+/* ==================== YE TERA THANK YOU PAGE KA BLOCK — BAS YEH ADD KIYA ==================== */
+.thank-you-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 150px;
+}
+
+.thank-you-container {
+  background: white;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.thank-you-icon {
+  margin-bottom: 20px;
+}
+
+.thank-you-container h1 {
+  font-size: 28px;
+  margin: 20px 0;
+  color: #28a745;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.order-details {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.detail-row strong {
+  color: #222;
+}
+
+.thank-you-actions {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.continue-shopping-btn {
+  background: #222;
+  color: white;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.track-order-link {
+  background-color: #007bff;
+  text-decoration: none;
+  border-radius: 8px;
+  color:white;
+  font-weight: 500;
+  padding: 14px 30px;
+}
+
+
+/* ==================== SIRF RESPONSIVE ADD KIYA — STYLING WAISI HI ==================== */
+
+@media (max-width: 992px) {
+  .checkout-container {
+    grid-template-columns: 1fr;     /* Tablet pe form aur summary ek ke neeche */
+    gap: 40px;
+    margin-top: 200px;
+  }
+  
+  /* Summary upar aa jaye mobile/tablet pe (better UX) */
+  .order-summary {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-page,
+  .thank-you-page {
+    padding: 20px 15px;
+    margin-top: 120px;              /* Navbar ke liye space thoda kam */
+  }
+
+  /* Form aur summary ka padding thoda kam mobile pe */
+  .checkout-form-section,
+  .order-summary {
+    padding: 30px 20px !important;
+  }
+
+  /* First name / Last name mobile pe ek ke neeche */
+  .name-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  /* Thank you page buttons full width aur ek ke neeche */
+  .thank-you-actions {
+    flex-direction: column;
+    gap: 16px;
+    
+  }
+
+  .continue-shopping-btn,
+  .track-order-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Thank you page thoda compact mobile pe */
+  .thank-you-container {
+    padding: 40px 20px;
+    margin-top: 200px;
   }
 }
