@@ -12,7 +12,7 @@ const Women = () => {
       images: [
         "/women-shoes1.jpg",
         "/women-shoes2.jpg",
-        "/women-shoes3.jpg",
+        "/women-sheoes3.jpg",
         "/women-shoes4.jpg",
         "/women-shoes5.jpg",
       ],
@@ -25,9 +25,9 @@ const Women = () => {
       id: 2,
       images: [
         "/women-shoes2.jpg",
-        "/women-shoes3.jpg",
+        "/women-sheoes3.jpg",
         "/women-shoes1.jpg",
-        "/women-shoes5.jpg",
+        "/women-shoes4.jpg",
       ],
       title: "PREMIUM COLLECTION",
       price: "Rs. 4,999",
@@ -37,7 +37,7 @@ const Women = () => {
     {
       id: 3,
       images: [
-        "/women-shoes3.jpg",
+        "/women-sheoes3.jpg",
         "/women-shoes4.jpg",
         "/women-shoes2.jpg",
         "/women-shoes1.jpg",
@@ -51,7 +51,7 @@ const Women = () => {
       id: 4,
       images: [
         "/women-shoes4.jpg",
-        "/women-shoes5.jpg",
+        "/women-shoes4.jpg",
         "/women-shoes3.jpg",
         "/women-shoes2.jpg",
       ],

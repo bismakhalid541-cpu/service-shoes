@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ cartCount = 0 }) => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
