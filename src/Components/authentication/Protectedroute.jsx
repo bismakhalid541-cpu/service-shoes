@@ -5,15 +5,13 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const user = localStorage.getItem("user");
-  // Ya agar token use kar rahe ho toh:
-  // const token = localStorage.getItem("token");
 
-  // Agar user nahi hai → login pe bhej do
+  // Agar user nahi hai → login page pe bhej do (jo "/" pe hai)
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
-  // Agar user hai → andar ka page dikhao
+  // Agar user hai → protected content dikhao
   return <Outlet />;
 };
 

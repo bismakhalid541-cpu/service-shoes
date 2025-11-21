@@ -34,26 +34,22 @@
   height: 580px;                    /* BOHOT BADA – luxury feel */
   background: #ffffff;
   overflow: hidden;
-  border-radius: 14px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
-  transition: all 0.4s ease;
+ 
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-repeat: no-repeat;
+    
   }
 
-  &:hover {
-    box-shadow: 0 16px 40px rgba(0,0,0,0.14);
-    transform: translateY(-4px);
-  }
+  
 
   &:hover img {
     transform: scale(1.02);
@@ -95,7 +91,366 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
 }
+/* ============================================= */
+/*   SERVIS SHOES EXACT REVIEW DRAWER - FINAL   */
+/* ============================================= */
+.review-drawer-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
+.servis-review-drawer {
+  background: #fff;
+  width: 100%;
+  max-width: 580px;
+  max-height: 94vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 30px 100px rgba(0,0,0,0.45);
+  position: relative;
+  
+
+  /* Close Button */
+  .close-review-btn {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 40px;
+    height: 40px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    font-size: 34px;
+    font-weight: 300;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+   
+  }
+
+  /* Servis Logo */
+  .review-logo {
+    text-align: center;
+    margin-bottom: 8px;
+    img {
+      height: 50px;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 28px 0;
+  }
+
+  /* Product Preview */
+  .review-product {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #f8f8f8;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 32px;
+
+    img {
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #eee;
+    }
+
+    .product-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin: 0 0 6px 0;
+      color: #111;
+    }
+
+    .star-rating .star {
+      color: #ddd;
+      font-size: 22px;
+    }
+  }
+
+  /* Form Labels */
+  .form-group {
+    margin-bottom: 26px;
+
+    label {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 10px;
+
+      .required {
+        color: #e31e24;
+      }
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: .5px solid black;
+      font-size: 15px;
+      transition: border 0.3s ease;
+      box-sizing: border-box;
+
+      &:focus {
+        outline: none;
+        border-color: #000;
+      }
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+  }
+
+  /* Large Stars for Overall Rating */
+  .stars-large {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0 4px;
+
+    .star-large {
+      font-size: 52px;
+      color: #ddd;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #ffbf00;
+        transform: scale(1.15);
+      }
+    }
+  }
+
+  /* Upload Box */
+  .upload-box .upload-area {
+    border: 2.5px dashed #ccc;
+    border-radius: 16px;
+    padding: 36px 20px;
+    text-align: center;
+    background: #fafafa;
+
+    span {
+      display: block;
+      font-weight: 600;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #111;
+    }
+
+    p {
+      color: #777;
+      font-size: 14px;
+      margin: 10px 0 18px;
+    }
+
+    .upload-btn {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-weight: 400;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.3s;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        fill: white;
+      }
+
+      &:hover {
+        background: #e31e24;
+      }
+    }
+  }
+
+  /* Radio Buttons */
+  .inline .radio-group {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+
+  /* Quality Scale */
+  .quality-scale {
+    display: flex;
+    justify-content: space-between;
+    margin: 14px 0 8px;
+
+    label {
+      cursor: pointer;
+      flex: 1;
+      margin: 0 4px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border: .5px solid black;
+      font-weight: 400;
+      transition: all 0.3s;
+    }
+
+    input:checked + span {
+      background: #000;
+      color: white;
+      border-color: #000;
+    }
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: #666;
+    font-weight: 500;
+  }
+
+  /* Name Row */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  /* Submit Button */
+  .submit-review-full-btn {
+    width: 100%;
+    background: #000;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    cursor: pointer;
+    margin: 32px 0 16px;
+    transition: 0.4s;
+
+    &:hover {
+      background: #e31e24;
+      transform: translateY(-2px);
+    }
+  }
+
+  .terms-note {
+    text-align: center;
+    font-size: 12.5px;
+    color: #777;
+    line-height: 1.5;
+
+    a {
+      color: #000;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+  }
+}
+
+/* Mobile Perfection */
+@media (max-width: 768px) {
+  .servis-review-drawer {
+    .quality-scale {
+      label {
+        margin: 0 2px;
+      }
+
+      span {
+        font-size: 14px;
+        height: 38px;
+        line-height: 38px;
+      }
+    }
+
+    .scale-labels {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .servis-review-drawer {
+    padding: 28px 20px;
+    border-radius: 24px;
+
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .quality-scale {
+      flex-wrap: wrap;
+      gap: 8px;
+
+      label {
+        flex: 1 1 calc(33.333% - 8px);
+        margin: 0;
+        min-width: 80px;
+      }
+
+      span {
+        font-size: 13px;
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+
+    .scale-labels {
+      font-size: 11px;
+      flex-wrap: wrap;
+    }
+  }
+  
+  .review-logo h1 { font-size: 38px; }
+  h2 { font-size: 19px; }
+  .stars-large .star-large { font-size: 46px; }
+}
 /* ==================== INFO SECTION – COMPACT & CLEAN ==================== */
 .info-section {
   max-width: 480px;
@@ -106,19 +461,30 @@
   justify-content: flex-start;
 
   h1 {
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 600;
     margin: 0 0 12px;
     color: #1a1a1a;
     line-height: 1.25;
   }
+.review{
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
 
   .price-section {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 28px;
-
+    margin-bottom: 8px;
+    margin-top: 25px;
+    .regular-price{
+      font-size: 13px;
+      color: #333;
+      text-decoration: line-through;
+    }
     .current-price {
       font-size: 30px;
       font-weight: 700;
@@ -130,7 +496,10 @@
       text-decoration: line-through;
     }
   }
-
+.id{
+  font-size: 16px;
+      color: #999;
+}
   h3 {
     font-size: 13px;
     font-weight: 600;
@@ -141,12 +510,12 @@
   }
 
   .color-btn {
-    width: 140px;
-    height: 50px;
+    width: 100px;
+    height: 40px;
     background: #000;
     color: white;
     border: 1px solid black;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.6px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.2);
@@ -170,14 +539,15 @@
   .size-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    max-width: 340px;
+    gap: 2px;
+    max-width: 250px;
 
     .size-btn {
-      height: 50px;
-      border: 1.5px solid #000;
+      height: 40px;
+      width: 90px;
+      border: .5px solid #000;
       background: white;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -186,8 +556,6 @@
       &.selected {
         background: #000;
         color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
       }
     }
   }
@@ -195,9 +563,9 @@
   .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 20px;
-    border: 1.5px solid black;
-    padding: 12px 18px;
+    gap: 8px;
+    border: .5px solid black;
+    padding: 6px 2px;
     background: white;
     width: fit-content;
     margin-top: 10px;
@@ -205,7 +573,7 @@
     button {
       background: none;
       border: none;
-      font-size: 28px;
+      font-size: 14px;
       cursor: pointer;
       font-weight: bold;
       width: 36px;
@@ -224,7 +592,7 @@
 
     span {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 200;
       min-width: 50px;
       text-align: center;
       color: #000;
@@ -232,24 +600,23 @@
   }
 
   .add-to-bag-btn {
-    width: 70%;
-    padding: 20px;
+    width: 30%;
+    padding: 16px;
     background: #000;
     color: white;
     border: none;
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
+    letter-spacing: 1.5px;
     cursor: pointer;
     margin: 32px 0 40px;
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    
+   
 
     &:hover {
       background: #111;
-      transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.32);
+     
     }
   }
 }

@@ -37,14 +37,13 @@ const Card = ({ product }) => {
   };
 
   const handleClick = () => {
-    // Navigate to detail page with product data
     navigate(`/detail-page/${product.id}`, { 
       state: { product } 
     });
   };
 
   const handleDotClick = (e, index) => {
-    e.stopPropagation(); // Prevent card click when clicking dots
+    e.stopPropagation();
     goToSlide(index);
   };
 
@@ -78,7 +77,15 @@ const Card = ({ product }) => {
       </div>
 
       <p className="description">{product.title}</p>
-      <p className="price">{product.price}</p>
+      <div className="info">
+        <p className="name-section">{product.name}</p>
+        <div className="price-section">
+          <p className="regular-price">{product.regularprice}</p>
+          <p className="price">{product.price}</p>
+          
+         
+        </div>
+      </div>
     </div>
   );
 };

@@ -39,6 +39,7 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+      z-index: 2;
 
       button {
         padding: 5px 10px;
@@ -60,24 +61,59 @@
     }
 
     .dots {
-      position: absolute;
+       position: absolute;
       bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+       left: 50%;
+       transform: translateX(-50%);
+       display: flex;
+       gap: 5px;
+
+       .dot {
+         width: 9px;
+         height: 9px;
+         border-radius: 50%;
+         background-color: rgba(0, 0, 0, 0.5);
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+
+         &.active {
+           background-color: #000;
+         }
+       }
+    }
+   }
+
+  .info{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    font-size: 14px;
+    text-align: left;
+    padding: 0 10px 10px 10px;
+    
+    .name-section {
+      margin: 8px 0 4px 0;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .price-section {
       display: flex;
-      gap: 5px;
+      align-items: center;
+      gap: 8px;
 
-      .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+      .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
 
-        &.active {
-          background-color: #000;
-        }
+      .regular-price {
+        font-size: 14px;
+        color: #999;
+        text-decoration: line-through;
+        margin: 0;
       }
     }
   }
@@ -90,12 +126,48 @@
     color: white;
     background-color: black;
   }
-  .price {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 5px 0 10px 10px; // top 5px, right 0, bottom 10px, left 10px
-  color: #333;
-  text-align: left; // left align
 }
- 
+
+// Responsive
+@media (max-width: 768px) {
+  .gallery-slider-container {
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .gallery-card {
+    width: calc(50% - 10px);
+    
+    .image-wrapper {
+      height: 200px;
+      
+      .dots {
+        opacity: 1;
+        visibility: visible;
+        
+        .dot {
+          width: 7px;
+          height: 7px;
+          gap: 4px;
+        }
+      }
+    }
+
+    .info .price-section {
+      .price {
+        font-size: 15px;
+      }
+      .regular-price {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }

@@ -1,95 +1,79 @@
-// import React from "react";
-// import Navbar from "../Components/Navbar/Navbar";
-// import { FaFilter, FaSortAmountDown } from "react-icons/fa";
-// import "../Components/topline/Topline.scss";
-// import Productgallery from "../Components/productgallery/Productgallery";
-// import Footer from "../Components/Footer/Footer";
-// import Topline from "../Components/topline/Topline";
-// const Kids = () => {
-//   const kidsImages = [
-//     "/kid1.jpg",
-//     "/kid2.jpg",
-//     "/kid3.jpg",
-//     "/kid4.jpg",
-//     "/kid5.jpg",
-//     "/kid.jpg",
-//     "/kid2.jpg",
-//     "/kid5.jpg",
-//   ];
-//   return (
-//     <div>
-//       <Navbar />
-//       <Topline />
-
-//       <Productgallery images={kidsImages} />
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default Kids;
-
 import React from "react";
 import Navbar from "../Components/Navbar/Navbar";
 import Productgallery from "../Components/productgallery/Productgallery";
-import Footer from '../Components/Footer/Footer';
+import Footer from "../Components/Footer/Footer";
 import Topline from "../Components/topline/Topline";
 
 const Kids = () => {
   // Har product ka apna data with unique images
   const womenProducts = [
     {
-      id: 1,
+      id: "BCH010018203325",
       images: [
-        "/women-shoes1.jpg",
-        "/women-shoes2.jpg",
-        "/women-shoes3.jpg",
-        "/women-shoes4.jpg",
-        "/women-shoes5.jpg",
+        "/kid1.jpg",
+        "/kid2.jpg",
+        "/kid3.jpg",
+        "/kid4.jpg",
+        "/kid5.jpg",
+        "/kid.jpg",
+        "/kid2.jpg",
+        "/kid5.jpg",
       ],
-      title: "ONLINE EXCLUSIVE DISCOUNT",
-      price: "Rs. 3,499",
+      title: "Kids Sneeker",
+      price: " 3,499",
       discount: "-25%",
-      isNew: true
+      name: "kids sport shoes",
+      regularprice: "1,799.00",
+      isNew: true,
     },
     {
-      id: 2,
+      id: "BCH010018203325",
       images: [
         "/women-shoes2.jpg",
-        "/women-shoes3.jpg",
+        "/women-sheoes3.jpg",
         "/women-shoes1.jpg",
         "/women-shoes5.jpg",
       ],
-      title: "PREMIUM COLLECTION",
-      price: "Rs. 4,999",
+      title: "Kids Sneeker",
+      price: " 4,999",
       discount: "-30%",
-      isNew: true
+      name: "kids sport shoes",
+      regularprice: "1,799.00",
+      isNew: true,
     },
     {
-      id: 3,
+      id: "BCH010018203325",
       images: [
-        "/women-shoes3.jpg",
+        "/women-sheoes3.jpg",
         "/women-shoes4.jpg",
         "/women-shoes2.jpg",
         "/women-shoes1.jpg",
+        "/kid2.jpg",
+        "/kid5.jpg",
       ],
-      title: "SUMMER SPECIAL",
-      price: "Rs. 2,999",
+      title: "Kids Sneeker",
+      price: " 2,999",
       discount: "-20%",
-      isNew: false
+      regularprice: "1,799.00",
+      name: "kids sport shoes",
+      isNew: false,
     },
     {
-      id: 4,
+      id: "BCH010018203325",
       images: [
         "/women-shoes4.jpg",
-        "/women-shoes5.jpg",
-        "/women-shoes3.jpg",
+
+        "/women-sheoes3.jpg",
         "/women-shoes2.jpg",
+        "/kid2.jpg",
+        "/kid5.jpg",
       ],
-      title: "TRENDING NOW",
-      price: "Rs. 3,799",
+      title: "Kids Sneeker",
+      price: " 3,799",
+      name: "kids sport shoes",
+      regularprice: "1,799.00",
       discount: "-15%",
-      isNew: true
+      isNew: true,
     },
     // Add more products as needed
   ];

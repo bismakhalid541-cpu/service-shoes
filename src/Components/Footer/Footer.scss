@@ -81,7 +81,6 @@
     .footer-column {
       flex: 1;
       min-width: 200px;
-    
 
       h4 {
         font-weight: 400;
@@ -134,11 +133,12 @@
     padding-bottom: 50px; // marquee کے لیے جگہ
 
     .footer-info1 {
-      text-align: right;
+      margin-left: 40%;
       font-size: 12px;
       font-weight: bold;
       color: #000;
       margin-bottom: 20px;
+      cursor: pointer;
     }
 
     // Full Width Edge-to-Edge Marquee
@@ -149,7 +149,7 @@
       bottom: 0;
       background: #000;
       color: #fff;
-      padding: 14px 0;
+      padding: 14px 33px;
       overflow: hidden;
       white-space: nowrap;
       font-size: 13px;
@@ -163,7 +163,8 @@
         display: inline-block;
         animation: marquee 20s linear infinite;
         padding-left: 100%;
-
+        width: 100%;
+       
         span {
           display: inline-block;
           padding-right: 100px;
@@ -197,14 +198,18 @@
   .shipping-marquee {
     font-size: 12px;
     padding: 12px 0;
+    
 
     .marquee-content span {
       padding-right: 60px;
+     
     }
   }
 
   .marquee-content {
     animation-duration: 16s;
+     animation-iteration-count: infinite;
+     
   }
 }
 
@@ -219,4 +224,3 @@
     animation-duration: 14s;
   }
 }
-

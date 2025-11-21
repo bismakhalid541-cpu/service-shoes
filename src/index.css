@@ -1,3 +1,22 @@
-*{
-  font-family: Arial, Helvetica, sans-serif;
+/* ===== GLOBAL FONT – SERVIS SHOES EXACT FEEL ===== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility; /* Extra crisp text */
+  letter-spacing: -0.2px; /* Servis ka exact feel */
+}
+
+/* Optional: Headings ko thoda bold aur premium bana do */
+h1, h2, h3, h4, h5, h6,
+.text-bold, .price, .add-to-bag-btn {
+  letter-spacing: -0.5px;
+  font-weight: 600 !important;
+}
+
+/* Buttons aur inputs ko bhi perfect kar do */
+button, input, textarea, select {
+  font-family: inherit !important;
 }

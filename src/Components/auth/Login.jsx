@@ -12,19 +12,21 @@ const Login = ({ switchToSignup }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      const user = await login(formData.email, formData.password);
-      console.log("Logged in user:", user);
-      alert("Login successful!");
-      navigate("/home"); // ← navigate after login
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  try {
+    const user = await login(formData.email, formData.password);
+    console.log("Logged in user:", user);
 
+    // Yeh dono line daal do
+    localStorage.setItem("user", JSON.stringify(user)); // ← yeh bhool gaye the shayad!
+    navigate("/home", { replace: true }); // ← chhota h + replace
+
+  } catch (err) {
+    setError(err.message || "Login failed");
+  }
+};
   return (
     <div className="login-container">
       <div className="login-card">

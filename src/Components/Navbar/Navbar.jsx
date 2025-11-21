@@ -140,6 +140,7 @@ const Navbar = ({ cartTrigger = 0 }) => {
             <span className="cart-badge">{totalCount}</span>
           </div>
         </div>
+        
       </div>
          {/* ==================== FULL SCREEN SEARCH OVERLAY ==================== */}
       {searchOpen && (
@@ -344,3 +345,4 @@ const Navbar = ({ cartTrigger = 0 }) => {
 };
 
 export default Navbar;
+
