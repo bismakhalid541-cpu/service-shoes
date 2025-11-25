@@ -1,39 +1,199 @@
-/* Contactus.scss */
+// /* Contactus.scss */
+
+// .contactus {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;  // left align
+//   text-align: left;
+//   padding: 60px 250px; // top/bottom + side padding
+//   gap: 20px; // thoda zyada spacing for better look
+
+//   h1 {
+//     font-weight: bolder;
+//     font-weight: bold;
+//     margin-bottom: 25px;
+//     color: #222;
+//   }
+
+//   h3 {
+//     font-size: 22px; // increased from 18px
+//     font-weight: 500;
+//     color: black;
+//     margin: 8px 0;
+//     display: flex;
+//     cursor: pointer;
+//     align-items: center; // vertically center the text
+//   }
+
+//   // responsive for smaller screens
+//   @media (max-width: 768px) {
+//     padding: 40px 20px;
+
+//     h1 {
+//       font-size: 36px; // responsive size
+//     }
+//     h3 {
+//       font-size: 18px; // responsive size
+//     }
+//   }
+// }
+
 
 .contactus {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;  // left align
+  align-items: flex-start;
   text-align: left;
-  padding: 60px 250px; // top/bottom + side padding
-  gap: 20px; // thoda zyada spacing for better look
+  padding: 150px 250px;
+  gap: 22px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background: #fff;
 
   h1 {
-    font-weight: bolder;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: #222;
+    font-size: 48px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -12px;
+      width: 80px;
+      height: 4px;
+      background: #e74c3c;
+      border-radius: 2px;
+    }
   }
 
   h3 {
-    font-size: 22px; // increased from 18px
+    font-size: 22px;
     font-weight: 500;
-    color: black;
-    margin: 8px 0;
+    color: #222;
+    margin: 10px 0;
+    line-height: 1.5;
     display: flex;
-    cursor: pointer;
-    align-items: center; // vertically center the text
+    align-items: center;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #e74c3c;
+    }
+
+    // Icons add karne ke liye (optional lekin bohot premium lagta hai)
+    &:nth-of-type(2)::before { content: "Phone: "; font-weight: 600; color: #e74c3c; margin-right: 8px; }
+    &:nth-of-type(3)::before { content: "Email: "; font-weight: 600; color: #e74c3c; margin-right: 8px; }
+    &:nth-of-type(4)::before { content: "Days: "; font-weight: 600; color: #e74c3c; margin-right: 8px; }
+    &:nth-of-type(5)::before { content: "Hours: "; font-weight: 600; color: #e74c3c; margin-right: 8px; }
+    &:nth-of-type(6)::before { content: "Location: "; font-weight: 600; color: #e74c3c; margin-right: 8px; }
   }
 
-  // responsive for smaller screens
-  @media (max-width: 768px) {
-    padding: 40px 20px;
+  // Highlight main headings
+  h3:nth-of-type(1) {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e74c3c;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .contactus {
+    padding: 100px 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .contactus {
+    padding: 90px 80px;
 
     h1 {
-      font-size: 36px; // responsive size
+      font-size: 42px;
     }
+
     h3 {
-      font-size: 18px; // responsive size
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contactus {
+    padding: 80px 40px;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+
+    h1 {
+      font-size: 38px;
+      text-align: center;
+
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    h3 {
+      font-size: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      &:nth-of-type(1) {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contactus {
+    padding: 70px 20px;
+    gap: 16px;
+
+    h1 {
+      font-size: 34px;
+      &::after {
+        width: 60px;
+        height: 3px;
+      }
+    }
+
+    h3 {
+      font-size: 17px;
+      line-height: 1.6;
+
+      &:nth-of-type(1) {
+        font-size: 22px;
+      }
+
+      // Mobile pe icons thoda chhota kiya
+      &::before {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .contactus {
+    padding: 60px 15px;
+
+    h1 {
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 16px;
     }
   }
 }

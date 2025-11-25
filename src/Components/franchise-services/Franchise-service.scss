@@ -1,82 +1,233 @@
-/* Franchiseprogram.scss */
+// /* Franchiseprogram.scss */
 
+// .Franchise-program {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center; // center everything horizontally
+//   text-align: center;
+//   padding: 60px 40px;
+//   font-family: Arial, sans-serif;
+//   color: #333;
+//   gap: 25px; // spacing between elements
+//   margin-top: 150px;
+
+//   h1 {
+//     font-size: 48px; // large heading
+//     font-weight: bold;
+//     color: #222;
+//     margin-bottom: 10px;
+//     width: 100%;
+//   }
+
+//   /* Divider line below heading, full width */
+//   h1::after {
+//     content: '';
+//     display: block;
+//     width: 100%;  // full container width
+//     height: 1px;  // slightly thicker line
+//     background-color: #000;
+//     margin: 15px 0 0 0; // top margin only
+//   }
+
+//   img {
+//     max-width: 80%;
+//     height: auto;
+//     margin-top: 30px;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+//   }
+
+//   button {
+//     margin-top: 20px;
+//     padding: 12px 30px;
+//     font-size: 16px;
+//     font-weight: bold;
+//     color: #fff;
+//     background-color: #000;
+//     border: none;
+//     border-radius: 6px;
+//     cursor: pointer;
+//     transition: all 0.3s ease;
+
+//     &:hover {
+//       background-color: #333;
+//     }
+//   }
+// }
+
+// /* Responsive */
+// @media (max-width: 768px) {
+//   .Franchise-program {
+//     padding: 40px 20px;
+//     gap: 20px;
+//   }
+
+//   h1 {
+//     font-size: 36px;
+//   }
+
+//   h1::after {
+//     width: 100%;
+//     height: 1px;
+//   }
+
+//   img {
+//     max-width: 100%;
+//   }
+
+//   button {
+//     padding: 10px 25px;
+//     font-size: 14px;
+//   }
+// }
+
+
+/* Franchise-program.scss */
 .Franchise-program {
   display: flex;
   flex-direction: column;
-  align-items: center; // center everything horizontally
+  align-items: center;
   text-align: center;
-  padding: 60px 40px;
-  font-family: Arial, sans-serif;
+  padding: 80px 40px;
+  font-family: Arial, Helvetica, sans-serif;
   color: #333;
-  gap: 25px; // spacing between elements
-  margin-top: 150px;
+  gap: 32px;
+  margin-top: 120px; // adjusted for better spacing from header/nav
 
   h1 {
-    font-size: 48px; // large heading
-    font-weight: bold;
+    font-size: clamp(2.5rem, 8vw, 4rem); // responsive font size
+    font-weight: 700;
     color: #222;
-    margin-bottom: 10px;
-    width: 100%;
+    margin: 0;
+    line-height: 1.2;
   }
 
-  /* Divider line below heading, full width */
+  /* Full-width divider line under h1 */
   h1::after {
     content: '';
     display: block;
-    width: 100%;  // full container width
-    height: 1px;  // slightly thicker line
-    background-color: #000;
-    margin: 15px 0 0 0; // top margin only
-  }
-
-  img {
-    max-width: 80%;
-    height: auto;
-    margin-top: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-
-  button {
-    margin-top: 20px;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #000;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: #333;
-    }
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .Franchise-program {
-    padding: 40px 20px;
-    gap: 20px;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-
-  h1::after {
     width: 100%;
-    height: 1px;
+    height: 2px;
+    background-color: #000;
+    margin: 20px auto 0;
   }
 
   img {
     max-width: 100%;
+    width: 900px;           // ideal max width on large screens
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin: 20px 0;
   }
 
   button {
-    padding: 10px 25px;
-    font-size: 14px;
+    margin-top: 20px;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+
+    &:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Tablet & below */
+@media (max-width: 992px) {
+  .Franchise-program {
+    padding: 70px 30px;
+    margin-top: 100px;
+    gap: 28px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 800px;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .Franchise-program {
+    padding: 60px 20px;
+    margin-top: 90px;
+    gap: 24px;
+  }
+
+  h1::after {
+    height: 1.5px;
+    margin: 16px auto 0;
+  }
+
+  button {
+    padding: 13px 32px;
+    font-size: 1rem;
+    min-width: 160px;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+  .Franchise-program {
+    padding: 50px 15px;
+    margin-top: 80px;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  h1::after {
+    margin: 14px auto 0;
+  }
+
+  img {
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  button {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+
+.Franchise-program {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+
+  h1, img, button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  h1 { animation-delay: 0.2s; }
+  img { animation-delay: 0.4s; }
+  button { animation-delay: 0.6s; }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -115,7 +115,7 @@ const Navbar = ({ cartTrigger = 0 }) => {
 
         {/* Left */}
         <div className="left">
-          <Link to="/home">
+          <Link to="/home" className="center-logo">
             <img src="/logo.png" alt="logo" className="logo" />
           </Link>
           <nav className="desktop-nav">
@@ -321,6 +321,7 @@ const Navbar = ({ cartTrigger = 0 }) => {
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
                       required
+    
                     />
                   </div>
 

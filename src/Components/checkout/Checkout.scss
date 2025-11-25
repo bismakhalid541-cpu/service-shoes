@@ -83,6 +83,7 @@ select {
 @media (max-width: 480px) {
     grid-template-columns: 1fr;     /* Mobile pe full width */
     gap: 16px;
+    margin-top: 110px;
   }
   .city-postal-row {
     display: grid;
@@ -398,56 +399,61 @@ select {
 }
 
 
-/* ==================== SIRF RESPONSIVE ADD KIYA — STYLING WAISI HI ==================== */
+
+/* ────────────────── RESPONSIVE ONLY (Exact Margins As Per Your Demand) ────────────────── */
 
 @media (max-width: 992px) {
-  .checkout-container {
-    grid-template-columns: 1fr;     /* Tablet pe form aur summary ek ke neeche */
-    gap: 40px;
-    margin-top: 200px;
+  /* Tablet (768px–992px) pe bhi 110px–120px range mein perfect lagega */
+  .checkout-page,
+  .thank-you-page {
+    margin-top: 120px;
   }
-  
-  /* Summary upar aa jaye mobile/tablet pe (better UX) */
+
+  .checkout-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
   .order-summary {
-    order: -1;
+    order: -1; /* Summary upar aayega mobile/tablet pe */
   }
 }
 
 @media (max-width: 480px) {
+  /* Mobile pe EXACTLY 110px – jaise tumne bola */
   .checkout-page,
   .thank-you-page {
+    margin-top: 110px;          /* Tumhara demand: exactly 110px */
     padding: 20px 15px;
-    margin-top: 120px;              /* Navbar ke liye space thoda kam */
   }
 
-  /* Form aur summary ka padding thoda kam mobile pe */
   .checkout-form-section,
   .order-summary {
-    padding: 30px 20px !important;
+    padding: 24px 16px;
   }
 
-  /* First name / Last name mobile pe ek ke neeche */
-  .name-row {
-    grid-template-columns: 1fr !important;
+  /* Name row & City-Postal row mobile pe ek ke neeche */
+  .name-row,
+  .city-postal-row {
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  /* Thank you page buttons full width aur ek ke neeche */
+  /* Thank you page buttons */
   .thank-you-actions {
     flex-direction: column;
     gap: 16px;
-    
   }
 
   .continue-shopping-btn,
   .track-order-link {
-    width: 100%;
-    text-align: center;
+    width: 70%;
   }
 
-  /* Thank you page thoda compact mobile pe */
   .thank-you-container {
     padding: 40px 20px;
-    margin-top: 200px;
   }
 }
+
+
+
